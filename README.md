@@ -37,7 +37,28 @@ Sometimes its convenient to know how many notes are between two given notes, lik
 val numNotesBetween = between(Note(C, 0), Note(C, 1)) // 12 notes
 ```
 
-# License
+## How to get the Music API into your build:
+
+### Step 1. Add the JitPack repository to your build file
+
+```groovy
+allprojects {
+  repositories {
+    ...
+    maven { url 'https://jitpack.io' }
+  }
+}
+```
+
+### Step 2. Add the dependency
+
+```groovy
+dependencies {
+  implementation 'com.github.fluxtah:music:0.1.0'
+}
+```
+
+## License
 ```
  Copyright 2020 Ian Warwick
 
