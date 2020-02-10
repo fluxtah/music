@@ -37,6 +37,12 @@ Sometimes its convenient to know how many notes are between two given notes, lik
 val numNotesBetween = between(Note(C, 0), Note(C, 1)) // 12 notes
 ```
 
+## Stepping up a major scale interval
+```kotlin
+val fifth = Note(PitchClass.C, 0) + 5
+```
+Now the `fifth` Note shall be G0
+
 ## How to get the Music API into your build:
 
 ### Step 1. Add the JitPack repository to your build file

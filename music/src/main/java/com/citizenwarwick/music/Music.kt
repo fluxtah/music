@@ -37,6 +37,47 @@ data class Note(val pitch: PitchClass, val octave: Int) : Comparable<Note> {
             "$pitch$octave"
         }
     }
+
+    /**
+     * Move up the major scale in intervals, for instance + 5 from C is G
+     */
+    operator fun plus(interval: Int): Note {
+        var currentNote = this
+        if (interval == 1) return this // the first is this
+        var scaleIndex = 0
+        var pos = 0
+        while (pos < interval - 1) {
+            val step = MAJOR_SCALE_INTERVALS[scaleIndex]
+            repeat(step) {
+                currentNote = currentNote.inc()
+            }
+            scaleIndex++
+            if (scaleIndex == 7) {
+                scaleIndex = 0
+            }
+            pos++
+        }
+
+        return currentNote
+    }
+
+    operator fun inc(): Note {
+        var currentPitch = pitch
+        return if (pitch == PitchClass.B) {
+            Note(PitchClass.C, octave + 1)
+        } else {
+            Note(++currentPitch, octave)
+        }
+    }
+
+    operator fun dec(): Note {
+        var currentPitch = pitch
+        return if (pitch == PitchClass.C) {
+            Note(PitchClass.B, octave - 1)
+        } else {
+            Note(--currentPitch, octave)
+        }
+    }
 }
 
 enum class PitchClass {
@@ -56,6 +97,15 @@ enum class PitchClass {
     operator fun dec(): PitchClass {
         val index = max(values().indexOf(this) - 1, 0)
         return values()[index]
+    }
+
+    operator fun inc(): PitchClass {
+        val values = values()
+        val index = values.indexOf(this) + 1
+        if (index >= values.size) {
+            return values[0]
+        }
+        return values[index]
     }
 }
 
@@ -93,3 +143,7 @@ fun between(from: Note, to: Note): Int =
     ((to.octave - from.octave) * 12) + PitchClass.values().indexOf(to.pitch)
 
 private val ACC_NOTES = listOf(PitchClass.Cs, PitchClass.Ds, PitchClass.Fs, PitchClass.Gs, PitchClass.As)
+private val MAJOR_SCALE_INTERVALS = listOf(2, 2, 1, 2, 2, 2, 1)
+fun walkUpFrom(step: (Note) -> Unit) {
+
+}
