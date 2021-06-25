@@ -3,7 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
 group = 'com.github.fluxtah'
-version = "0.2"
+version = "0.3"
 
 android {
     compileSdkVersion 30
