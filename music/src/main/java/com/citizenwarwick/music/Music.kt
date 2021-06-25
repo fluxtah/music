@@ -80,19 +80,19 @@ data class Note(val pitch: PitchClass, val octave: Int) : Comparable<Note> {
     }
 }
 
-enum class PitchClass {
-    C,
-    Cs,
-    D,
-    Ds,
-    E,
-    F,
-    Fs,
-    G,
-    Gs,
-    A,
-    As,
-    B;
+enum class PitchClass(name: String, isNatural: Boolean) {
+    C("C", true),
+    Cs("C#", false),
+    D("D", true),
+    Ds("D#", false),
+    E("E", true),
+    F("F", true),
+    Fs("F#", false),
+    G("G", true),
+    Gs("G#", false),
+    A("A", true),
+    As("A#", false),
+    B("B", true);
 
     operator fun dec(): PitchClass {
         val index = max(values().indexOf(this) - 1, 0)
@@ -137,12 +137,13 @@ inline val String.chord: Chord
     }.toSet()
 
 
-fun Set<Note>.lower(): Note = min()!!
-fun Set<Note>.upper(): Note = max()!!
+fun Set<Note>.lower(): Note = minOrNull()!!
+fun Set<Note>.upper(): Note = maxOrNull()!!
 fun between(from: Note, to: Note): Int =
     ((to.octave - from.octave) * 12) + PitchClass.values().indexOf(to.pitch)
 
-private val ACC_NOTES = listOf(PitchClass.Cs, PitchClass.Ds, PitchClass.Fs, PitchClass.Gs, PitchClass.As)
+private val ACC_NOTES =
+    listOf(PitchClass.Cs, PitchClass.Ds, PitchClass.Fs, PitchClass.Gs, PitchClass.As)
 private val MAJOR_SCALE_INTERVALS = listOf(2, 2, 1, 2, 2, 2, 1)
 fun walkUpFrom(step: (Note) -> Unit) {
 
