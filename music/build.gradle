@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'maven-publish'
 
 group = 'com.github.fluxtah'
-version = "0.3"
+version = "0.4"
 
 android {
     compileSdkVersion 30
