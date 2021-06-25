@@ -80,7 +80,7 @@ data class Note(val pitch: PitchClass, val octave: Int) : Comparable<Note> {
     }
 }
 
-enum class PitchClass(name: String, isNatural: Boolean) {
+enum class PitchClass(val noteName: String, val isNatural: Boolean) {
     C("C", true),
     Cs("C#", false),
     D("D", true),
