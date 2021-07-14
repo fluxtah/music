@@ -60,7 +60,7 @@ allprojects {
 
 ```groovy
 dependencies {
-  implementation 'com.github.fluxtah:music:0.1.0'
+  implementation 'com.github.fluxtah:music:0.6.0'
 }
 ```
 
